@@ -107,6 +107,218 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 children: [
                   SizedBox(
                     width: 500,
+                    height: 75,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.grid_view_rounded, color: Colors.redAccent,),
+                            const SizedBox(width: 20.0,),
+                            const Text("Select a Group:"),
+                            const SizedBox(width: 25.0,),
+                            DropdownButton<String>(
+                              value: selectedGroup,
+                              icon: const Icon(Icons.arrow_downward),
+                              elevation: 16,
+                              style: const TextStyle(color: Colors.deepPurple),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  if (newValue != "None") {
+                                    clearDropDown("Cat");
+                                    clearDropDown("SubCat");
+                                    clearDropDown("Item");
+                                    selectedGroup = newValue!;
+                                    loadCategories();
+                                  }
+                                });
+                              },
+                              items: groupDropDown.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 500,
+                    height: 75,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.category, color: Colors.amberAccent,),
+                            const SizedBox(width: 20.0,),
+                            const Text("Select a Category:"),
+                            const SizedBox(width: 25.0,),
+                            DropdownButton<String>(
+                              value: selectedCat,
+                              icon: const Icon(Icons.arrow_downward),
+                              elevation: 16,
+                              style: const TextStyle(color: Colors.deepPurple),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  if (newValue != "None") {
+                                    clearDropDown("SubCat");
+                                    clearDropDown("Item");
+                                    selectedCat = newValue!;
+                                    loadSubCategories();
+                                  }
+                                });
+                              },
+                              items: catDropDown.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 500,
+                    height: 75,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.mediation, color: Colors.blueAccent,),
+                            const SizedBox(width: 20.0,),
+                            const Text("Select a Sub Category:"),
+                            const SizedBox(width: 25.0,),
+                            DropdownButton<String>(
+                              value: selectedSubCat,
+                              icon: const Icon(Icons.arrow_downward),
+                              elevation: 16,
+                              style: const TextStyle(color: Colors.deepPurple),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  if (newValue != "None") {
+                                    clearDropDown("Item");
+                                    selectedSubCat = newValue!;
+                                    loadItems();
+                                  }
+                                });
+                              },
+                              items: subCatDropDown.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 500,
+                    height: 75,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.emoji_objects_outlined, color: Colors.green,),
+                            const SizedBox(width: 20.0,),
+                            const Text("Select an Item: "),
+                            const SizedBox(width: 25.0,),
+                            DropdownButton<String>(
+                              value: selectedItem,
+                              icon: const Icon(Icons.arrow_downward),
+                              elevation: 16,
+                              style: const TextStyle(color: Colors.deepPurple),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  if (newValue != "None") {
+                                    selectedItem = newValue!;
+                                  }
+                                });
+                              },
+                              items: itemDropDown.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 500,
+                    height: 150,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          children: [
+                            ElevatedButton.icon(
+                              icon: const Icon(Icons.stars_sharp),
+                              label: const Text("Generate"),
+                              onPressed: (){
+                                if (
+                                selectedGroup != "None" &&
+                                    selectedCat != "None" &&
+                                    selectedSubCat != "None" &&
+                                    selectedItem != "None"
+                                ) {
+                                  // Code generation logic
+                                  String tempCode = "";
+                                  // Characters start from ASCII value 65. Ignoring 0th index of "None" hence added 64
+                                  String groupCode = String.fromCharCode(groupDropDown.indexOf(selectedGroup) + 64);
+                                  int catCode = catDropDown.indexOf(selectedCat);
+                                  int subCatCode = subCatDropDown.indexOf(selectedSubCat);
+                                  int itemCode = itemDropDown.indexOf(selectedItem);
+                                  tempCode = "Code: " + groupCode + catCode.toString().padLeft(2, "0") + subCatCode.toString().padLeft(2, "0") + itemCode.toString().padLeft(3, "0");
+                                  setState(() {
+                                    code = tempCode;
+                                  });
+                                }
+                                else {
+                                  showCustomSnackBar("All selections are mandatory");
+                                }
+                              },
+                            ),
+                            const SizedBox(height: 20.0,),
+                            Text(code, style: const TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  /*SizedBox(
+                    width: 500,
                     height: 500,
                     child: Card(
                       elevation: 15.0,
@@ -282,7 +494,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                         ],
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),
