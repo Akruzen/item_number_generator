@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/add_subcat2.dart';
+import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddSubCat extends StatefulWidget {
@@ -46,6 +47,7 @@ class _AddSubCatState extends State<AddSubCat> {
         title: const Text("Add a Sub Category"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

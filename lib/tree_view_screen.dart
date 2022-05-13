@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_treeview/flutter_simple_treeview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'homeFAB.dart';
 
 class TreeViewScreen extends StatefulWidget {
   const TreeViewScreen({Key? key}) : super(key: key);
@@ -68,6 +69,7 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
         title: const Text("Tree View"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

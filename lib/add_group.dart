@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddGroup extends StatefulWidget {
@@ -34,6 +35,7 @@ class _AddGroupState extends State<AddGroup> {
         title: const Text("Add a Group"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

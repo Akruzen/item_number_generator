@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/edit_screen2.dart';
+import 'package:item_number_generator/homeFAB.dart';
 
 class EditScreen extends StatefulWidget {
   const EditScreen({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _EditScreenState extends State<EditScreen> {
         title: const Text("Edit"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

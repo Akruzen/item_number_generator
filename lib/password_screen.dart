@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/edit_screen.dart';
+import 'package:item_number_generator/homeFAB.dart';
 import 'package:item_number_generator/selection_screen.dart';
 
 class PasswordScreen extends StatefulWidget {
@@ -38,6 +39,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         title: Text(widget.buttonPress),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

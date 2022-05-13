@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:item_number_generator/add_category.dart';
 import 'package:item_number_generator/add_group.dart';
 import 'package:item_number_generator/add_subcat.dart';
+import 'package:item_number_generator/homeFAB.dart';
 import 'package:item_number_generator/master_reset_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,6 +42,7 @@ class _SelectionScreenClassState extends State<SelectionScreenClass> {
         title: const Text("Enter the details"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

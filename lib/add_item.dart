@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddItem extends StatefulWidget {
@@ -47,6 +48,7 @@ class _AddItemState extends State<AddItem> {
         title: const Text("Add an Item"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

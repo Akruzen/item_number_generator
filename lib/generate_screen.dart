@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GenerateScreen extends StatefulWidget {
@@ -90,6 +91,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         title: const Text("Item Name Generator"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

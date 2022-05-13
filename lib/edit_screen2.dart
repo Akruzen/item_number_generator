@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/edit_Menu.dart';
+import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EditScreen2 extends StatefulWidget {
@@ -180,6 +181,7 @@ class _EditScreen2State extends State<EditScreen2> {
         title: const Text("Edit"),
         centerTitle: true,
       ),
+      floatingActionButton: getHomeButton(context),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
