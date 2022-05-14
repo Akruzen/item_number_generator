@@ -1,15 +1,23 @@
-# item_number_generator
+# Item Number Generator
 
-A new Flutter project.
+This project  allows the users to add new items to predefined groups. The Groups, categories and subcategories can
+also be added provided you have the admin access.
+Features:
+1. Generate item codes.
+2. Add new items, subcategories, categories or groups.
+3. Edit created items,
+4. View the hierarchy of data stored conveniently using tree view.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is configured to run on Windows Operating System. It is based on version 2.10 of Flutter which 
+released the stable channel release for support of Windows Platform.
 
-A few resources to get you started if this is your first Flutter project:
+![Windows](https://download.logo.wine/logo/Microsoft_Windows/Microsoft_Windows-Logo.wine.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Resources and dependencies used in the project:
+1. Shared Preferences [Link](https://pub.dev/packages/shared_preferences)
+2. Flutter simple tree view [Link](https://pub.dev/packages/flutter_simple_treeview)
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,

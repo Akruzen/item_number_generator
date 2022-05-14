@@ -127,8 +127,6 @@ class _GroupDropDownState extends State<GroupDropDown> {
                   Icon(Icons.category, color: Colors.amberAccent,),
                   SizedBox(height: 20.0,),
                   Icon(Icons.mediation, color: Colors.blueAccent,),
-                  SizedBox(height: 20.0,),
-                  Icon(Icons.emoji_objects_outlined, color: Colors.green,),
                 ],
               ),
               const SizedBox(width: 20.0,),
@@ -140,8 +138,6 @@ class _GroupDropDownState extends State<GroupDropDown> {
                   Text("Add a Category:"),
                   SizedBox(height: 25.0,),
                   Text("Add a Sub Category:"),
-                  SizedBox(height: 25.0,),
-                  Text("Add an Item: "),
                 ],
               ),
               const SizedBox(width: 20.0,),
@@ -178,19 +174,6 @@ class _GroupDropDownState extends State<GroupDropDown> {
                     onPressed: (){
                       if (widget.isAdmin) {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSubCat(isCreateItemTapped: false,)));
-                      }
-                      else {
-                        showCustomSnackBar("Not Permitted. Go to create from the Main Menu instead.");
-                      }
-                    },
-                    icon: const Icon(Icons.add),
-                    label: const Text("Add"),
-                  ),
-                  const SizedBox(height: 20.0,),
-                  ElevatedButton.icon(
-                    onPressed: (){
-                      if (widget.isAdmin) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSubCat(isCreateItemTapped: true,)));
                       }
                       else {
                         showCustomSnackBar("Not Permitted. Go to create from the Main Menu instead.");

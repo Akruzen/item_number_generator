@@ -29,7 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  material_floating_search_bar: ^0.2.6
   shared_preferences: ^2.0.13
   flutter_simple_treeview: ^3.0.1
 
