@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/homeFAB.dart';
+import 'package:item_number_generator/search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'add_item.dart';
 
 class GenerateScreen extends StatefulWidget {
   const GenerateScreen({Key? key}) : super(key: key);
@@ -91,7 +94,36 @@ class _GenerateScreenState extends State<GenerateScreen> {
         title: const Text("Item Name Generator"),
         centerTitle: true,
       ),
-      floatingActionButton: getHomeButton(context),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton.extended(
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchPage()));
+            },
+            label: const Text("Search for Item"),
+            icon: const Icon(Icons.search),
+            heroTag: "Search",
+            backgroundColor: Colors.amber[700],
+          ),
+          const SizedBox(height: 20,),
+          FloatingActionButton.extended(
+            onPressed: (){
+              if (selectedGroup == "None" || selectedCat == "None" || selectedSubCat == "None") {
+                showCustomSnackBar("Please select a subcategory before proceeding");
+              }
+              else {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddItem(selectedSubCategory: selectedSubCat,)));
+              }
+            },
+            heroTag: null,
+            label: const Text("Add Item in selected Sub Category"),
+            icon: const Icon(Icons.emoji_objects_outlined),
+          ),
+          const SizedBox(height: 20,),
+          getHomeButton(context),
+        ],
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -109,6 +141,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     width: 500,
                     height: 75,
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
@@ -154,6 +189,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     width: 500,
                     height: 75,
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
@@ -197,6 +235,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     width: 500,
                     height: 75,
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
@@ -239,6 +280,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     width: 500,
                     height: 75,
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(

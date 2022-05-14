@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'checkNameExist.dart';
+
 class AddCategory extends StatefulWidget {
   const AddCategory({Key? key}) : super(key: key);
 
@@ -109,11 +111,15 @@ class _AddCategoryState extends State<AddCategory> {
                           const SizedBox(height: 20.0,),
                           ElevatedButton.icon(
                             onPressed: () async {
+                              bool nameExists = await checkNameExists(catNameController.text.toString());
                               if(catNameController.text.isEmpty) {
                                 showCustomSnackBar("Field cannot be empty");
                               }
                               else if (catDropDownValue == "None") {
                                 showCustomSnackBar("Please select a group first");
+                              }
+                              else if (nameExists) {
+                                showCustomSnackBar("A Group, Category, Sub Category or Item with same name already exists.");
                               }
                               else {
                                 if (catNamesList != null) {

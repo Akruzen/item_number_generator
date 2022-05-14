@@ -3,6 +3,8 @@ import 'package:item_number_generator/add_item.dart';
 import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'checkNameExist.dart';
+
 class AddSubCat2 extends StatefulWidget {
   final String selectedGroup;
   final bool isCreateItemTapped;
@@ -59,7 +61,7 @@ class _AddSubCat2State extends State<AddSubCat2> {
             icon: const Icon(Icons.arrow_right),
             label: const Text("Next"),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => AddItem(selectedCategory: subCatDropDownValue ?? "None")));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AddItem(selectedSubCategory: subCatDropDownValue ?? "None")));
             },
           ),
         ];
@@ -81,11 +83,15 @@ class _AddSubCat2State extends State<AddSubCat2> {
           ),
           ElevatedButton.icon(
             onPressed: () async {
+              bool nameExists = await checkNameExists(subCatNameController.text.toString());
               if (subCatDropDownValue == "None") {
                 showCustomSnackBar("Please select a category first");
               }
               else if (subCatNameController.text.isEmpty) {
                 showCustomSnackBar("Field cannot be empty");
+              }
+              else if (nameExists) {
+                showCustomSnackBar("A Group, Category, Sub Category or Item with same name already exists.");
               }
               else {
                 if (subCatNamesList != null) {

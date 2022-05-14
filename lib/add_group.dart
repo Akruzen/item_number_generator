@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'checkNameExist.dart';
+
 class AddGroup extends StatefulWidget {
   const AddGroup({Key? key}) : super(key: key);
 
@@ -73,8 +75,12 @@ class _AddGroupState extends State<AddGroup> {
                           const SizedBox(height: 20.0,),
                           ElevatedButton.icon(
                             onPressed: () async {
+                              bool nameExists = await checkNameExists(groupNameController.text.toString());
                               if(groupNameController.text.isEmpty) {
                                 showCustomSnackBar("Field cannot be empty");
+                              }
+                              else if (nameExists) {
+                                showCustomSnackBar("A Group, Category, Sub Category or Item with same name already exists.");
                               }
                               else {
                                 if (groupNamesList != null) {

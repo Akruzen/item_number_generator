@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:item_number_generator/checkNameExist.dart';
 import 'package:item_number_generator/homeFAB.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddItem extends StatefulWidget {
-  final String selectedCategory;
-  const AddItem({Key? key, required this.selectedCategory}) : super(key: key);
+  final String selectedSubCategory;
+  const AddItem({Key? key, required this.selectedSubCategory}) : super(key: key);
 
   @override
   State<AddItem> createState() => _AddItemState();
@@ -15,20 +16,11 @@ class _AddItemState extends State<AddItem> {
   TextEditingController itemDescController = TextEditingController();
   List<String>? itemNamesList = [];
   List<String>? itemDescList = [];
-  String? subCatDropDownValue = "None";
 
   @override
   Widget build(BuildContext context) {
 
     bool _isSnackBarActive = false;
-
-    void loadSavedGroups () async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      setState(() {
-        itemNamesList = prefs.getStringList(widget.selectedCategory) ?? [];
-        itemNamesList?.insert(0, "None");
-      });
-    }
 
     void showCustomSnackBar (String message) {
       if (!_isSnackBarActive) {
@@ -40,8 +32,6 @@ class _AddItemState extends State<AddItem> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar).closed.then((SnackBarClosedReason reason) {_isSnackBarActive = false;});
       }
     }
-
-    loadSavedGroups();
 
     return Scaffold(
       appBar: AppBar(
@@ -70,32 +60,9 @@ class _AddItemState extends State<AddItem> {
                       child: Column(
                         children: [
                           const SizedBox(height: 20.0,),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Text("Select the sub category you want to add the item in.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
-                          ),
-                          const SizedBox(height: 20.0,),
-                          DropdownButton<String>(
-                            value: subCatDropDownValue,
-                            icon: const Icon(Icons.arrow_downward),
-                            elevation: 16,
-                            style: const TextStyle(color: Colors.deepPurple),
-                            underline: Container(
-                              height: 2,
-                              color: Colors.deepPurpleAccent,
-                            ),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                subCatDropDownValue = newValue!;
-                              });
-                            },
-                            items: itemNamesList!
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Text("Selected Sub Category: " + widget.selectedSubCategory, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
                           ),
                           const SizedBox(height: 20.0,),
                           const Text("Enter New Item", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
@@ -129,35 +96,33 @@ class _AddItemState extends State<AddItem> {
                               if(itemNameController.text.isEmpty || itemDescController.text.isEmpty) {
                                 showCustomSnackBar("Field cannot be empty");
                               }
-                              else if (subCatDropDownValue == "None") {
+                              else if (widget.selectedSubCategory == "None") {
                                 showCustomSnackBar("Please select a group first");
                               }
                               else {
-                                if (itemNamesList != null) {
-                                  String? selectedSubCat = subCatDropDownValue;
-                                  setState(() {
-                                    subCatDropDownValue = null;
-                                  });
+                                bool nameExists = await checkNameExists(itemNameController.text.toString());
+                                if (nameExists) {
+                                  showCustomSnackBar("A Group, Category, Sub Category or Item with same name already exists.");
+                                }
+                                else if (itemNamesList != null) {
+                                  String? selectedSubCat = widget.selectedSubCategory;
                                   final prefs = await SharedPreferences.getInstance();
                                   String name = itemNameController.text.toString();
                                   String desc = itemDescController.text.toString();
-                                  itemNamesList = prefs.getStringList(selectedSubCat ?? "Uncategorized") ?? [];
+                                  itemNamesList = prefs.getStringList(selectedSubCat) ?? [];
                                   if (itemNamesList?.contains(name) == false) {
                                     itemNamesList?.add(name);
                                     itemDescList?.add(desc);
                                     // To save the item Name
-                                    prefs.setStringList(selectedSubCat ?? "Uncategorized", itemNamesList ?? ["Empty List"]);
+                                    prefs.setStringList(selectedSubCat, itemNamesList ?? ["Empty List"]);
                                     // To save the item Description
                                     prefs.setStringList(name, itemDescList ?? ["Empty List"]);
                                     showCustomSnackBar("Item added successfully");
-                                    print("Saved " + itemNamesList.toString() + " in " + (selectedSubCat ?? "Uncategorized"));
+                                    print("Saved " + itemNamesList.toString() + " in " + (selectedSubCat));
                                     print("Saved " + itemDescList.toString() + " in " + (name));
                                     print(itemNamesList);
                                     print(itemDescList);
-                                    int count = 0;
-                                    Navigator.popUntil(context, (route) {
-                                      return count++ == 3;
-                                    });
+                                    Navigator.pop(context);
                                   }
                                   else {
                                     showCustomSnackBar("Name already exists");

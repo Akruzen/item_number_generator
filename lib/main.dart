@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/generate_screen.dart';
 import 'package:item_number_generator/password_screen.dart';
-import 'package:item_number_generator/selection_screen.dart';
 import 'package:item_number_generator/tree_view_screen.dart';
 
 void main() {
@@ -75,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                               children: const [
                                 Icon(Icons.add, color: Colors.white,),
                                 SizedBox(width: 10.0,),
-                                Text("Create", style: TextStyle(color: Colors.white, fontSize: 17.0),),
+                                Text("Master\nData", style: TextStyle(color: Colors.white, fontSize: 17.0),),
                               ],
                             ),
                           ),

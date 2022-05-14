@@ -71,7 +71,7 @@ class _AddSubCatState extends State<AddSubCat> {
                           const SizedBox(height: 20.0,),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Text("Select the group you want to add the sub category in.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
+                            child: Text("Select the group", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
                           ),
                           const SizedBox(height: 20.0,),
                           DropdownButton<String>(
