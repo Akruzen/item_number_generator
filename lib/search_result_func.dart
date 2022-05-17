@@ -10,6 +10,13 @@ Future<List<String>> getSearchMatch(String keyword) async {
           if (itemName.toLowerCase().contains(keyword.toLowerCase())) {
             matchingSearchesList.add(itemName);
           }
+          else {
+            for (String desc in (prefs.getStringList(itemName))!) {
+              if (desc.toLowerCase().contains(keyword.toLowerCase())) {
+                matchingSearchesList.add(itemName);
+              }
+            }
+          }
         }
       }
     }

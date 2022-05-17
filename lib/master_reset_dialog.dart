@@ -72,6 +72,7 @@ class _MasterResetAlertState extends State<MasterResetAlert> {
                     prefs.remove(catName);
                   }
                   prefs.remove(groupNames);
+                  prefs.clear();
                 }
                 prefs.setStringList("groupNamesList", clearedList);
                 prefs.setStringList("Uncategorized", clearedList);

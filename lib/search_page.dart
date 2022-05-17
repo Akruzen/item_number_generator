@@ -29,7 +29,10 @@ class _SearchPageState extends State<SearchPage> {
                 Text(title),
                 Text(hierarchyList[0] + " -> " + hierarchyList[1] + " -> " + hierarchyList[2], style: const TextStyle(
                   fontSize: 15.0, color: Colors.grey
-                ),)
+                ),),
+                Text("Description: " + hierarchyList[3], style: const TextStyle(
+                    fontSize: 15.0, color: Colors.grey
+                ),),
               ],
             ),
           ),
@@ -94,6 +97,19 @@ class _SearchPageState extends State<SearchPage> {
                             Container(
                               margin: const EdgeInsets.all(20.0),
                               child: TextField(
+                                onChanged: (String value) {
+                                  if (controller.text.isEmpty) {
+                                    setState(() {
+                                      result = "Type something in search to start.";
+                                      tileList = [];
+                                    });
+                                  }
+                                  else {
+                                    setState(() {
+                                      goClicked(controller.text.toString());
+                                    });
+                                  }
+                                },
                                 onSubmitted: (value) {
                                   if (controller.text.isEmpty) {
                                     showCustomSnackBar("Please enter a value to search");
@@ -148,6 +164,7 @@ class _SearchPageState extends State<SearchPage> {
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
                           children: [
+                            const SizedBox(height: 20.0,),
                             Text(result),
                             const SizedBox(height: 20.0,),
                             ...tileList,

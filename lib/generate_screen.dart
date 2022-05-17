@@ -91,7 +91,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Item Name Generator"),
+        title: const Text("Generate an item code"),
         centerTitle: true,
       ),
       floatingActionButton: Column(
@@ -113,7 +113,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 showCustomSnackBar("Please select a subcategory before proceeding");
               }
               else {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddItem(selectedSubCategory: selectedSubCat,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddItem(selectedSubCategory: selectedSubCat,))).then((value) => setState(() {
+                  itemDropDown.clear();
+                  loadItems();
+                }));
               }
             },
             heroTag: null,
@@ -152,7 +155,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                             const Icon(Icons.grid_view_rounded, color: Colors.redAccent,),
                             const SizedBox(width: 20.0,),
                             const Text("Select a Group:"),
-                            const SizedBox(width: 25.0,),
+                            const SizedBox(width: 70.0,),
                             DropdownButton<String>(
                               value: selectedGroup,
                               icon: const Icon(Icons.arrow_downward),
@@ -199,7 +202,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                             const Icon(Icons.category, color: Colors.amberAccent,),
                             const SizedBox(width: 20.0,),
                             const Text("Select a Category:"),
-                            const SizedBox(width: 25.0,),
+                            const SizedBox(width: 55.0,),
                             DropdownButton<String>(
                               value: selectedCat,
                               icon: const Icon(Icons.arrow_downward),
@@ -245,7 +248,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                             const Icon(Icons.mediation, color: Colors.blueAccent,),
                             const SizedBox(width: 20.0,),
                             const Text("Select a Sub Category:"),
-                            const SizedBox(width: 25.0,),
+                            const SizedBox(width: 29.0,),
                             DropdownButton<String>(
                               value: selectedSubCat,
                               icon: const Icon(Icons.arrow_downward),
@@ -290,7 +293,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                             const Icon(Icons.emoji_objects_outlined, color: Colors.green,),
                             const SizedBox(width: 20.0,),
                             const Text("Select an Item: "),
-                            const SizedBox(width: 25.0,),
+                            const SizedBox(width: 72.0,),
                             DropdownButton<String>(
                               value: selectedItem,
                               icon: const Icon(Icons.arrow_downward),

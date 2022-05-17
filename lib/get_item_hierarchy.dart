@@ -7,7 +7,7 @@ Future<List<String>> getItemHierarchy(String searchedItemName) async {
       for (String subCatName in (prefs.getStringList(catName)) ?? []) {
         for (String itemName in (prefs.getStringList(subCatName)) ?? []) {
           if (itemName == searchedItemName) {
-            return [groupNames, catName, subCatName];
+            return [groupNames, catName, subCatName, ((prefs.getStringList(searchedItemName) ?? ["No Description"])[0])];
           }
         }
       }
