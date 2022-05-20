@@ -1,3 +1,5 @@
+/// Program by Omkar Phadke, Pune Institute of Computer Technology, in May 2022
+
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/edit_screen.dart';
 import 'package:item_number_generator/homeFAB.dart';
@@ -25,7 +27,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   void okPressed () {
     setState(() {
-      _invalid = _password_controller.text != "abcd";
+      _invalid = _password_controller.text != "a1b2c3d4"; // Set the password here
       if (!_invalid) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => widget.buttonPress == "Edit" ? const EditScreen() : const SelectionScreenClass(isAdmin: true)));
       }

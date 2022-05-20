@@ -1,3 +1,5 @@
+/// Program by Omkar Phadke, Pune Institute of Computer Technology, in May 2022
+
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/generate_screen.dart';
 import 'package:item_number_generator/password_screen.dart';
@@ -12,9 +14,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String? result = ""; // Checks if user has pressed save and continue in generate screen
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Item Number Generator"),
+        title: const Text("Part Number Generator"),
         centerTitle: true,
       ),
       body: Container(
@@ -124,9 +129,13 @@ class HomeScreen extends StatelessWidget {
                                   )
                               )
                           ),
-                          onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const GenerateScreen()));
-                          },
+                          onPressed: () async {
+                            // result = await Navigator.push(context, MaterialPageRoute(builder: (context) => const GenerateScreen()));
+                            if (result != "again") {
+                              result = "";
+                              result = await Navigator.push(context, MaterialPageRoute(builder: (context) => const GenerateScreen()));
+                            }
+                            },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [

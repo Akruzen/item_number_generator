@@ -1,3 +1,5 @@
+/// Program by Omkar Phadke, Pune Institute of Computer Technology, in May 2022
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> checkNameExists(String name) async {

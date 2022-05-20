@@ -1,3 +1,5 @@
+/// Program by Omkar Phadke, Pune Institute of Computer Technology, in May 2022
+
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/add_item.dart';
 import 'package:item_number_generator/homeFAB.dart';

@@ -1,3 +1,5 @@
+/// Program by Omkar Phadke, Pune Institute of Computer Technology, in May 2022
+
 import 'dart:io';
 
 import 'package:csv/csv.dart';
@@ -51,6 +53,7 @@ void createCSV (BuildContext context) async {
   DateTime now = DateTime.now();
   try {
     String? outputFile = await FilePicker.platform.saveFile(
+      type: FileType.custom,
       allowedExtensions: ["csv"],
       dialogTitle: "Save the CSV File in:",
       fileName: now.year.toString() + now.month.toString() + now.day.toString() + now.hour.toString() + now.minute.toString()

@@ -1,7 +1,10 @@
+/// Program by Omkar Phadke, Pune Institute of Computer Technology, in May 2022
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_treeview/flutter_simple_treeview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'create_csv.dart';
 import 'homeFAB.dart';
 
 class TreeViewScreen extends StatefulWidget {
@@ -69,7 +72,26 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
         title: const Text("Tree View"),
         centerTitle: true,
       ),
-      floatingActionButton: getHomeButton(context),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton.extended(
+            onPressed: () {
+              try {
+                createCSV(context);
+              } catch (e) {
+                showCustomSnackBar(context, e.toString());
+              }
+            },
+            label: const Text("Create CSV"),
+            icon: const Icon(Icons.table_chart_outlined),
+            heroTag: "CSV",
+            backgroundColor: Colors.green,
+          ),
+          const SizedBox(height: 20.0,),
+          getHomeButton(context),
+        ],
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
