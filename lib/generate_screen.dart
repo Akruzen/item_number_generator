@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:item_number_generator/create_csv.dart';
 import 'package:item_number_generator/homeFAB.dart';
 import 'package:item_number_generator/search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,6 +98,19 @@ class _GenerateScreenState extends State<GenerateScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          FloatingActionButton.extended(
+            onPressed: () {
+              try {
+                createCSV(context);
+              } catch (e) {
+                showCustomSnackBar(e.toString());
+              }
+            },
+            label: const Text("Create CSV"),
+            icon: const Icon(Icons.table_chart_outlined),
+            heroTag: "CSV",
+          ),
+          const SizedBox(height: 20,),
           FloatingActionButton.extended(
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchPage()));
@@ -364,184 +378,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
                       ),
                     ),
                   ),
-                  /*SizedBox(
-                    width: 500,
-                    height: 500,
-                    child: Card(
-                      elevation: 15.0,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 10.0,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                children: const [
-                                  Icon(Icons.grid_view_rounded, color: Colors.redAccent,),
-                                  SizedBox(height: 20.0,),
-                                  Icon(Icons.category, color: Colors.amberAccent,),
-                                  SizedBox(height: 20.0,),
-                                  Icon(Icons.mediation, color: Colors.blueAccent,),
-                                  SizedBox(height: 20.0,),
-                                  Icon(Icons.emoji_objects_outlined, color: Colors.green,),
-                                ],
-                              ),
-                              const SizedBox(width: 20.0,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start  ,
-                                children: const [
-                                  Text("Select a Group:"),
-                                  SizedBox(height: 25.0,),
-                                  Text("Select a Category:"),
-                                  SizedBox(height: 25.0,),
-                                  Text("Select a Sub Category:"),
-                                  SizedBox(height: 25.0,),
-                                  Text("Select an Item: "),
-                                ],
-                              ),
-                              const SizedBox(width: 20.0,),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  DropdownButton<String>(
-                                    value: selectedGroup,
-                                    icon: const Icon(Icons.arrow_downward),
-                                    elevation: 16,
-                                    style: const TextStyle(color: Colors.deepPurple),
-                                    underline: Container(
-                                      height: 2,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        if (newValue != "None") {
-                                          clearDropDown("Cat");
-                                          clearDropDown("SubCat");
-                                          clearDropDown("Item");
-                                          selectedGroup = newValue!;
-                                          loadCategories();
-                                        }
-                                      });
-                                    },
-                                    items: groupDropDown.map<DropdownMenuItem<String>>((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
-                                  DropdownButton<String>(
-                                    value: selectedCat,
-                                    icon: const Icon(Icons.arrow_downward),
-                                    elevation: 16,
-                                    style: const TextStyle(color: Colors.deepPurple),
-                                    underline: Container(
-                                      height: 2,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        if (newValue != "None") {
-                                          clearDropDown("SubCat");
-                                          clearDropDown("Item");
-                                          selectedCat = newValue!;
-                                          loadSubCategories();
-                                        }
-                                      });
-                                    },
-                                    items: catDropDown.map<DropdownMenuItem<String>>((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
-                                  DropdownButton<String>(
-                                    value: selectedSubCat,
-                                    icon: const Icon(Icons.arrow_downward),
-                                    elevation: 16,
-                                    style: const TextStyle(color: Colors.deepPurple),
-                                    underline: Container(
-                                      height: 2,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        if (newValue != "None") {
-                                          clearDropDown("Item");
-                                          selectedSubCat = newValue!;
-                                          loadItems();
-                                        }
-                                      });
-                                    },
-                                    items: subCatDropDown.map<DropdownMenuItem<String>>((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
-                                  DropdownButton<String>(
-                                    value: selectedItem,
-                                    icon: const Icon(Icons.arrow_downward),
-                                    elevation: 16,
-                                    style: const TextStyle(color: Colors.deepPurple),
-                                    underline: Container(
-                                      height: 2,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        if (newValue != "None") {
-                                          selectedItem = newValue!;
-                                        }
-                                      });
-                                    },
-                                    items: itemDropDown.map<DropdownMenuItem<String>>((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10.0,),
-                          ElevatedButton.icon(
-                            icon: const Icon(Icons.stars_sharp),
-                            label: const Text("Generate"),
-                            onPressed: (){
-                              if (
-                                  selectedGroup != "None" &&
-                                  selectedCat != "None" &&
-                                  selectedSubCat != "None" &&
-                                  selectedItem != "None"
-                              ) {
-                                // Code generation logic
-                                String tempCode = "";
-                                // Characters start from ASCII value 65. Ignoring 0th index of "None" hence added 64
-                                String groupCode = String.fromCharCode(groupDropDown.indexOf(selectedGroup) + 64);
-                                int catCode = catDropDown.indexOf(selectedCat);
-                                int subCatCode = subCatDropDown.indexOf(selectedSubCat);
-                                int itemCode = itemDropDown.indexOf(selectedItem);
-                                tempCode = "Code: " + groupCode + catCode.toString().padLeft(2, "0") + subCatCode.toString().padLeft(2, "0") + itemCode.toString().padLeft(3, "0");
-                                setState(() {
-                                  code = tempCode;
-                                });
-                              }
-                              else {
-                                showCustomSnackBar("All selections are mandatory");
-                              }
-                            },
-                          ),
-                          const SizedBox(height: 20.0,),
-                          Text(code, style: const TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),),
-                        ],
-                      ),
-                    ),
-                  ),*/
                 ],
               ),
             ),
