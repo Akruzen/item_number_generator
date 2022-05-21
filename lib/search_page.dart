@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/get_item_hierarchy.dart';
+import 'package:item_number_generator/get_part_number.dart';
 import 'package:item_number_generator/homeFAB.dart';
 import 'package:item_number_generator/search_result_func.dart';
 
@@ -29,6 +30,9 @@ class _SearchPageState extends State<SearchPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(title),
+                Text("Part Number: " + hierarchyList[4], style: const TextStyle(
+                  fontSize: 15.0, color: Colors.blueGrey,
+                ),),
                 Text(hierarchyList[0] + " -> " + hierarchyList[1] + " -> " + hierarchyList[2], style: const TextStyle(
                   fontSize: 15.0, color: Colors.grey
                 ),),

@@ -129,23 +129,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
             backgroundColor: Colors.amber[700],
           ),
           const SizedBox(height: 20,),
-          FloatingActionButton.extended(
-            onPressed: (){
-              if (selectedGroup == "None" || selectedCat == "None" || selectedSubCat == "None") {
-                showCustomSnackBar("Please select a subcategory before proceeding");
-              }
-              else {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddItem(selectedSubCategory: selectedSubCat,))).then((value) => setState(() {
-                  itemDropDown.clear();
-                  loadItems();
-                }));
-              }
-            },
-            heroTag: null,
-            label: const Text("Add Item in selected Sub Category"),
-            icon: const Icon(Icons.emoji_objects_outlined),
-          ),
-          const SizedBox(height: 20,),
           getHomeButton(context),
         ],
       ),

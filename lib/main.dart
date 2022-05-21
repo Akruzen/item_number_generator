@@ -1,12 +1,25 @@
 /// Program by Omkar Phadke, Pune Institute of Computer Technology, in May 2022
 
+import 'dart:ui';
+
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:item_number_generator/generate_screen.dart';
 import 'package:item_number_generator/password_screen.dart';
 import 'package:item_number_generator/tree_view_screen.dart';
 
 void main() {
-  runApp(const MaterialApp(home: HomeScreen(),));
+  runApp(
+      const MaterialApp(
+        home: HomeScreen(),
+        debugShowCheckedModeBanner: false,
+        title: "Dynapart",
+      ),
+  );
+  
+  doWhenWindowReady(() {
+    appWindow.title = "Dynapart";
+  });
 }
 
 class HomeScreen extends StatelessWidget {
