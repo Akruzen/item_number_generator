@@ -22,3 +22,6 @@ Resources and dependencies used in the project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+To download the release version of the program, click on the download link below:
+[Dynapart v1.0.1](https://github.com/Akruzen/item_number_generator/raw/master/Dynapart.zip)
