@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_treeview/flutter_simple_treeview.dart';
+import 'package:item_number_generator/get_part_number.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'create_csv.dart';
 import 'homeFAB.dart';
@@ -36,8 +37,9 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
           print("subCatName = " + subCatName);
           List<TreeNode> itemTreeNodeList = [];
           for (String itemName in (prefs.getStringList(subCatName)) ?? []) {
+            String partNumber = await getPartNumber(itemName);
             print("itemName = " + itemName);
-            itemTreeNodeList.add(TreeNode(content: borderText(itemName, Colors.greenAccent)));
+            itemTreeNodeList.add(TreeNode(content: borderText(itemName + " - " + partNumber, Colors.greenAccent)));
           }
           subCatTreeNodeList.add(TreeNode(content: borderText(subCatName, Colors.blueAccent), children: itemTreeNodeList));
         }
